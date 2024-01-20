@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BookShop",
+    "\\BookShop.Domain",
+    "\\BookShop.Domain\\Model",
+    "\\BookShop\\Controllers",
+    "\\BookShop\\Repositiores",
+    "\\BookShop\\Views",
+    "\\BookShop\\Views\\Home",
+    "\\BookShop\\Views\\Shared"
+  ],
+  "SelectedNode": "\\BookShop.sln",
+  "PreviewInSolutionExplorer": false
+}

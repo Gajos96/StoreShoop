@@ -1,0 +1,47 @@
+﻿using BookShop.Domain.Model;
+using BookShop.Domain.Model.DTO;
+using BookShop.Models;
+using BookShop.Ui.Repositiores;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+
+namespace BookShop.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeRepository _homeRepository;
+
+        public HomeController(ILogger<HomeController> logger, IHomeRepository homeRepository)
+        {
+            _logger = logger;
+            _homeRepository = homeRepository;
+        }
+
+        public async Task<IActionResult> IndexPL(string sterm = "" , int genreId = 0)
+        {
+            
+            IEnumerable<Book> books = await _homeRepository.GetBooks(sterm, genreId);
+            IEnumerable<Genre> genres = await _homeRepository.GetGenre();
+            DisplayModelBooks displayModel = new DisplayModelBooks
+            {
+                Books = books,
+                Genres = genres,
+                STerm = sterm,
+                GenreId = genreId
+            };
+            return View(displayModel);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
